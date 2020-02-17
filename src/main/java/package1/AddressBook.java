@@ -13,6 +13,7 @@ public class AddressBook {
         for (Map.Entry<String, Address> pair : bookNew.entrySet()) {
             addToInversed(pair.getValue(),pair.getKey());
 //            inversedbook.getOrDefault(pair.getValue().street, new HashMap<>()).getOrDefault(pair.getValue().home, new HashSet<>()).add(pair.getKey());
+            // не понимаю, почему нельзя добавлять объекты закомментированным способом
         }
     }
 
