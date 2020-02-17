@@ -74,35 +74,4 @@ public class AddressBook {
     }
 
 
-    //    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj instanceof AddressBook) {
-//            AddressBook other = (AddressBook) obj;
-//            if (other.book.size() != this.book.size()) return false;
-//            for (Map.Entry<String,String[]> entry: other.book.entrySet())
-//                if (!(this.book.get(entry.getKey()) != null && Arrays.equals(this.book.get(entry.getKey()), entry.getValue()))) {
-//                    return false;
-//                }
-//            return true;
-//        }
-//        return false;
-//    }
-    public void showAll() {
-        System.out.println("Нормальная книга");
-        for (Map.Entry<String, Address> pair : book.entrySet()
-        ) {
-            System.out.println("Фамилия: " + pair.getKey() + ", улица: " + pair.getValue().street + ", дом: "
-                    + pair.getValue().home + ", квартира: " + pair.getValue().appart);
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println("Обратная книга");
-        for (Map.Entry<String, Map<String, Set<String>>> pair : inversedbook.entrySet()) {
-            System.out.println("Улица: " + pair.getKey() + "Дом: " + pair.getValue());
-        }
-    }
-
 }
