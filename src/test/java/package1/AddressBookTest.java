@@ -103,11 +103,10 @@ public class AddressBookTest {
         pobediHome.add("Гуща");
 
 
-        assertTrue(kedrovaya.containsAll(addressBook.getPeople("Кедровая")));
-        assertTrue(kedrovayaHome.containsAll(addressBook.getPeople("Кедровая", "8")));
-        assertTrue(pobedi.containsAll(addressBook.getPeople("Победы")));
-        assertTrue(pobediHome.containsAll(addressBook.getPeople("Победы", "1")));
-
+        assertEquals(kedrovaya,addressBook.getPeople("Кедровая"));
+        assertEquals(kedrovayaHome,addressBook.getPeople("Кедровая", "8"));
+        assertEquals(pobedi,addressBook.getPeople("Победы"));
+        assertEquals(pobediHome,addressBook.getPeople("Победы", "1"));
     }
 
 }
