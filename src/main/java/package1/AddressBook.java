@@ -5,7 +5,7 @@ import java.util.*;
 
 public class AddressBook {
     private Map<String, Address> book;
-    private Map<String, Map<String, Set<String>>> inversedbook = new HashMap<>();
+    private Map<String, Map<String, Set<String>>> inversedBook = new HashMap<>();
 
     AddressBook(Map<String, Address> bookNew) {
         book= new HashMap<>(bookNew);
@@ -19,12 +19,12 @@ public class AddressBook {
     }
 
     private void addToInversed(Address address,String surname) {
-        inversedbook.computeIfAbsent(address.street, key -> new HashMap<>());
-        inversedbook.get(address.street).computeIfAbsent(address.home, key -> new HashSet<>()).add(surname);
+        inversedBook.computeIfAbsent(address.street, key -> new HashMap<>()).
+                computeIfAbsent(address.home, key->new HashSet<>()).add(surname);
     }
 
     private void removeFromInversed(Address address,String surname) {
-        inversedbook.get(address.street).get(address.home).remove(surname);
+        inversedBook.get(address.street).get(address.home).remove(surname);
     }
     public void add(String surname, Address address) {
         book.put(surname, address);
@@ -33,13 +33,11 @@ public class AddressBook {
 
 
     public void remove(String surname) {
-        removeFromInversed(book.get(surname),surname);
-        book.remove(surname);
+        removeFromInversed(book.remove(surname),surname);
     }
 
     public void changeAddress(String surname, Address address) {
-        removeFromInversed(book.get(surname),surname);
-        book.replace(surname, address);
+        removeFromInversed(Objects.requireNonNull(book.replace(surname, address)),surname);
         addToInversed(address,surname);
     }
 
@@ -49,14 +47,14 @@ public class AddressBook {
 
     public Set<String> getPeople(String street) {
         Set<String> set = new HashSet<>();
-        for (Set<String> pair : inversedbook.get(street).values()) {
+        for (Set<String> pair : inversedBook.get(street).values()) {
             set.addAll(pair);
         }
         return set;
     }
 
     public Set<String> getPeople(String street, String homeNum) {
-        return inversedbook.get(street).get(homeNum);
+        return new HashSet<>(inversedBook.get(street).get(homeNum));
     }
 
 
